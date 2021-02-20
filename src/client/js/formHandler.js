@@ -14,18 +14,19 @@ function handleSubmit(event) {
             credentials: 'same-origin',
             mode: 'cors',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ url: formText })
+            body: JSON.stringify({
+                url: formText
+            })
         })
         .then(res => res.json())
-        .then(data => {
-            console.log(data)
-            document.getElementById('results').innerHTML = data.score_tag
+        .then(function(res) {
+            document.getElementById('results').innerHTML = res.message
         })
-    console.log("::: Form Submitted :::");
-
 }
+
+
 
 
 export { handleSubmit }

@@ -1,4 +1,4 @@
-import { handleSubmit } from './js/formHandler'
+import { handleSubmit } from './js/formHandler';
 import './styles/resets.scss'
 import './styles/header.scss'
 import './styles/footer.scss'
@@ -11,5 +11,6 @@ alert("I EXIST")
 console.log("CHANGE!!");
 
 export {
-    handleSubmit
+    handleSubmit,
+
 }

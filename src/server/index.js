@@ -20,11 +20,11 @@ console.log(`Your API key is ${process.env.API_KEY}`);
 // });
 
 const app = express()
-app.use(express.static('dist'))
-app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static('dist'))
 
 console.log(__dirname)
 
@@ -47,17 +47,17 @@ app.post('/data', function(req, res) {
     // fetch(`https://api.meaningcloud.com/sentiment-2.1?key=${process.env.API_KEY}&lang=auto&of=json&url=${req.body.input}`)
     //     .then(data => data.json())
     //     .then(res.send(data))
-
-    fetch(`https://api.meaningcloud.com/sentiment-2.1?key=${process.env.API_KEY}&lang=auto&of=json&url=${req.body.input}`, {
+    console.log(req.body)
+    fetch(`https://api.meaningcloud.com/sentiment-2.1?key=${process.env.API_KEY}&lang=auto&of=json&url=${req.body.url}`, {
             method: 'POST',
-            credentials: 'same-origin',
-            mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',
             },
+        }).then((response) => {
+            return response.json();
         })
-        .then(res => res.json())
         .then((data) => {
+            console.log(data)
             res.send({
                 score_tag: data.score_tag,
                 agreement: data.agreement,
@@ -67,6 +67,18 @@ app.post('/data', function(req, res) {
             })
 
 
-        })
+        });
 
 })
+
+// app.post('/data', function(req, res) {
+//     const data = await fetch(`https://api.meaningcloud.com/sentiment-2.1?key=${process.env.API_KEY}&lang=auto&of=json&url=${req.body.url}`);
+//     try {
+//         // Transform into JSON
+//         const MeaningData = await data.json();
+//         response.send(MeaningData)
+//     } catch (error) {
+//         console.log("error", error);
+//         // appropriately handle the error
+//     }
+// })
