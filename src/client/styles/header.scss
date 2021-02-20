@@ -1,0 +1,14 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 40px;
+    background-color: #333;
+    color: white;
+    div {
+        font-size: 18px;
+        &:hover {
+            color: silver;
+            cursor: pointer;
+        }
+    }
+}
