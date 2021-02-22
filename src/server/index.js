@@ -2,12 +2,15 @@ var path = require('path')
 const express = require('express')
 const mockAPIResponse = require('./mockAPI.js')
 const bodyParser = require('body-parser')
-const cors = require('cors');
-
+const superagent = require('superagent')
 const dotenv = require('dotenv');
+const { url } = require('inspector')
 dotenv.config();
 console.log(`Your API key is ${process.env.API_KEY}`);
 
+//api vars
+const apiKey = process.env.API_KEY
+const baseUrl = "https://api.meaningcloud.com/sentiment-2.1?"
 const app = express()
 app.use(cors());
 app.use(bodyParser.json())
@@ -29,3 +32,8 @@ app.listen(8081, function() {
 app.get('/test', function(req, res) {
     res.send(mockAPIResponse)
 })
+
+
+//api call
+
+// superagent.get(url)
