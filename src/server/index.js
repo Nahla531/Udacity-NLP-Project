@@ -3,8 +3,11 @@ const express = require('express')
 const mockAPIResponse = require('./mockAPI.js')
 const bodyParser = require('body-parser')
 const superagent = require('superagent')
+const fetch = require('node-fetch')
 const dotenv = require('dotenv');
-const { url } = require('inspector')
+// const { url } = require('inspector')
+const cors = require('cors')
+const { response } = require('express')
 dotenv.config();
 console.log(`Your API key is ${process.env.API_KEY}`);
 
@@ -35,5 +38,28 @@ app.get('/test', function(req, res) {
 
 
 //api call
+// let text = userInput = req.body.text;
+app.post('/data-analayze', function(req, res) {
 
-// superagent.get(url)
+    let text = req.body.text;
+    let url = `${baseUrl}key=${apiKey}&txt=${text}&lang=en`
+
+    fetch(url, {
+
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(response => {
+        return response.json();
+    }).then((data) => {
+        console.log('data are', data)
+        res.send({
+            subjectivity: data.subjectivity,
+            agreement: data.agreement,
+            irony: data.irony,
+            score_tage: data.score_tag
+        });
+    })
+
+})
