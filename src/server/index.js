@@ -37,7 +37,8 @@ app.get('/test', function(req, res) {
 
 
 //api call
-// let text = userInput = req.body.text;
+//this whole part is from moilla network it helped me to do it 
+// here is the link :https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 app.post('/data-analayze', function(req, res) {
 
     let text = req.body.text;

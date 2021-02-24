@@ -7,7 +7,8 @@ function handleSubmit(event) {
 
 
     console.log("::: Form Submitted :::")
-
+        //this whole part is from moilla network it helped me to do it 
+        // here is the link :https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
     const postData = async(url = "", data = {}) => {
         console.log('Analyzing:', data);
         const response = await fetch(url, {
